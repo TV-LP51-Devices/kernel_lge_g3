@@ -214,6 +214,10 @@ struct kgsl_version {
 	unsigned int dev_minor;
 };
 
+#ifdef CONFIG_CPU_FREQ_GOV_ELEMENTALX
+extern int graphics_boost;
+#endif
+
 /* Performance counter groups */
 
 #define KGSL_PERFCOUNTER_GROUP_CP 0x0
