@@ -9,7 +9,7 @@ restore='\033[0m'
 clear
 
 # Resources
-THREAD="-j8"
+THREAD="-j18"
 KERNEL="zImage"
 DTBIMAGE="dtb"
 DEFCONFIG="xpresso_vs985_defconfig"
@@ -61,7 +61,7 @@ function make_modules {
 }
 
 function make_dtb {
-		$REPACK_DIR/tools/dtbToolCM -2 -o $REPACK_DIR/$DTBIMAGE -s 2048 -p scripts/dtc/ arch/arm/boot/
+		$REPACK_DIR/tools/dtbToolCM -2 -o $REPACK_DIR/$DTBIMAGE -s 2048 -p $RESOURCE_DIR/scripts/dtc/ $RESOURCE_DIR/arch/arm/boot/
 }
 
 function make_zip {
@@ -149,4 +149,5 @@ DATE_END=$(date +"%s")
 DIFF=$(($DATE_END - $DATE_START))
 echo "Time: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
 echo
+
 
