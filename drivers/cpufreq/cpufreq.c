@@ -1680,7 +1680,6 @@ int __cpufreq_driver_target(struct cpufreq_policy *policy,
 	if (target_freq == policy->cur)
 		return 0;
 
-<<<<<<< HEAD
 #if defined(CONFIG_LGE_LOW_BATT_LIMIT)
 	if(policy->max == target_freq && soc <= LOW_BATT_LIMIT_THRESHOLD
 		&& !out_low_battery_limit) {
@@ -1696,11 +1695,8 @@ int __cpufreq_driver_target(struct cpufreq_policy *policy,
 	}
 #endif
 	if (cpu_online(policy->cpu) && cpufreq_driver->target)
-=======
 	if (cpufreq_driver->target)
->>>>>>> 1a3913d... cpufreq: Upstream optimizations
 		retval = cpufreq_driver->target(policy, target_freq, relation);
-
 	return retval;
 }
 EXPORT_SYMBOL_GPL(__cpufreq_driver_target);
