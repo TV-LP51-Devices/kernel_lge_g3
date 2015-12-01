@@ -9,31 +9,33 @@ restore='\033[0m'
 clear
 
 # Resources
-THREAD="-j$(grep -c ^processor /proc/cpuinfo)"
+THREAD="-j8"
 KERNEL="zImage"
 DTBIMAGE="dtb"
-DEFCONFIG="ak_bacon_defconfig"
+DEFCONFIG="xpresso_vs985_defconfig"
+KERNEL_DIR=`pwd`
+RESOURCE_DIR="$KERNEL_DIR"
+ANYKERNEL_DIR="$RESOURCE_DIR/AnyKernel2"
 
 # Kernel Details
-BASE_AK_VER="AK"
-VER=".141.OPO.CM12.1"
+BASE_AK_VER="xpresso"
+VER="beta1"
 AK_VER="$BASE_AK_VER$VER"
 
 # Vars
 export LOCALVERSION=~`echo $AK_VER`
-export CROSS_COMPILE=${HOME}/android/AK-uber-5.0/bin/arm-eabi-
+export CROSS_COMPILE="/mnt/oadam11_roms2/validus/prebuilts/gcc/linux-x86/arm/arm-eabi-5.2-uber/bin/arm-eabi-"
 export ARCH=arm
 export SUBARCH=arm
-export KBUILD_BUILD_USER=ak
-export KBUILD_BUILD_HOST=kernel
+export KBUILD_BUILD_USER=oadam11
+export KBUILD_BUILD_HOST=xpresso-machine
 
 # Paths
-KERNEL_DIR=`pwd`
-REPACK_DIR="${HOME}/android/AK-OnePone-AnyKernel2"
-PATCH_DIR="${HOME}/android/AK-OnePone-AnyKernel2/patch"
-MODULES_DIR="${HOME}/android/AK-OnePone-AnyKernel2/modules"
-ZIP_MOVE="${HOME}/android/AK-releases"
-ZIMAGE_DIR="${HOME}/android/AK-OnePone/arch/arm/boot"
+REPACK_DIR="$ANYKERNEL_DIR"
+PATCH_DIR="$ANYKERNEL_DIR/patch"
+MODULES_DIR="$ANYKERNEL_DIR/modules"
+ZIP_MOVE="$RESOURCE_DIR/releases"
+ZIMAGE_DIR="$KERNEL_DIR/arch/arm/boot"
 
 # Functions
 function clean_all {
@@ -41,8 +43,6 @@ function clean_all {
 		cd $REPACK_DIR
 		rm -rf $KERNEL
 		rm -rf $DTBIMAGE
-		git reset --hard > /dev/null 2>&1
-		git clean -f -d > /dev/null 2>&1
 		cd $KERNEL_DIR
 		echo
 		make clean && make mrproper
