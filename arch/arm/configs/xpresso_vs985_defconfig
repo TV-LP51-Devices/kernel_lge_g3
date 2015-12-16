@@ -42,6 +42,9 @@ CONFIG_SOUND_CONTROL_HAX_3_GPL=y
 # Cpu voltage control
 CONFIG_CPU_VOLTAGE_TABLE=y
 
+# Hotplug
+CONFIG_BRICKED_HOTPLUG=y
+
 #
 # General setup
 #
